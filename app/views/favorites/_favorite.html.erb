@@ -1,0 +1,20 @@
+<!--<% if user_signed_in? %>-->
+  <!--<% if question.favorite_user(current_user.id) %>-->
+<!--  <%= link_to "", question_favorites_path(favorite, question_id: question.id), class:"fa fa-star-o", method: :delete, remote: true do %>
+      <span>
+        <%= question.favorites_count %>
+      </span>
+    <% end %>
+  <!--<% else %>-->
+  <%= link_to "", question_favorites_path(question), class:"fa fa-star-o", remote: true do %>
+      <span>
+        <%= question.favorites_count %>
+      </span>
+    <% end %>
+  <!--<% end %>-->
+<!--<% else %>-->
+<!--  <i class="fa fa-star-o"></i>
+    <span>
+      <%= question.favorites_count %>
+    </span>
+<!--<% end %>-->
