@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :questions
+  has_many :favorite_questions, dependent: :destroy
+  has_many :favo_questions, class_name: "Question", foreign_key: "question_id", through: :favorite_questions, source: :user
 end

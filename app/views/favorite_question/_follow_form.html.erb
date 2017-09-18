@@ -1,0 +1,13 @@
+      <% unless FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id).present? %>
+        <%= form_for(question.favorite_questions.build(user_id: current_user.id, question_id: question.id), url: favorite_questions_path) do |f| %>
+          <%= f.hidden_field :user_id %>
+          <%= f.hidden_field :question_id %>
+          <%= f.submit "いいね", class: "btn btn-large btn-primary" %>
+        <% end %>
+      <% else %>
+        <%= form_for(FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id), url: favorite_question_path(FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id)),method: :delete) do |f| %>
+          <%= f.hidden_field :user_id %>
+          <%= f.hidden_field :question_id %>
+          <%= f.submit "いいねを取り消す", class: "form-group submit" %>
+        <% end %>
+      <% end %>
