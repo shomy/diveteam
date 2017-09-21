@@ -1,15 +1,15 @@
 class FavoritesController < ApplicationController
 
   def create
-    @question = Question.find(params[:question_id])
-    favorite = Favorite.build(user_id: current_user.id, question_id: params[:question_id])
+    favorite = current_user.favorites.build(question_id: params[:question_id])
     favorite.save
+    @question = Question.find(params[:question_id])
   end
 
   def destroy
-    @question = Question.find(params[:question_id])
-    favorite = Favorite.find(user_id: current_user.id, question_id: params[:question_id])
+    favorite = Favorite.find(params[:id])
     favorite.destroy
+    @question = Question.find(params[:question_id])
   end
 
 end
