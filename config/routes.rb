@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :questions
+
+  resources :questions do
+    resources :favorites, only:[:create,:destroy]
+  end
+
   devise_for :users
   root 'top#index'
 
