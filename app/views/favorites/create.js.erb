@@ -1,1 +1,3 @@
-$("#favorites-button").html("<%= j render partial: 'favorites/favorite', locals: { question: @question} %>")
+$("#favorites-button").html("<%= j render partial: 'favorites/favorite', locals: { question: @question} %>");
+$("#favorites-button").removeclass(".fa .fa-star-o");
+$("#favorites-button").addclass(".fa .fa-star-o .star");

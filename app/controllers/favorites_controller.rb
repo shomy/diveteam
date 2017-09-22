@@ -1,5 +1,9 @@
 class FavoritesController < ApplicationController
 
+  def index
+    @favorite = current_user.favorites.joins(:question)
+  end
+
   def create
     favorite = current_user.favorites.build(question_id: params[:question_id])
     favorite.save
