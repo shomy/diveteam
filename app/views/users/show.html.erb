@@ -5,7 +5,18 @@
 <% end %>
 
 
-<%= @user.name %>
+<p><%= @user.name %></p>
+<p>
+  プロフィール：
+  <% if @user.profile? %>
+    <%= @user.profile  %>
+  <% else %>
+    <%= "#{@user.name}さんの自己紹介は未記入です。"  %>
+  <% end %>
+</p>
+<p>e-mail：<%= @user.email %></p>
+<p>質問数：<%= @user.questions.count %>回</p>
+
 
 <% if user_signed_in? && current_user.id === @user.id %>
     <%= link_to '編集', edit_user_registration_path(current_user) %>

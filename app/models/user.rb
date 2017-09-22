@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  has_many :questions
+  has_many :questions ,dependent: :destroy
   has_many :favorite_questions, dependent: :destroy
   has_many :favo_questions, class_name: "Question", foreign_key: "question_id", through: :favorite_questions, source: :user
   has_many :favorites
