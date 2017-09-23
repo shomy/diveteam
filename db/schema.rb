@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922111217) do
+ActiveRecord::Schema.define(version: 20170923051828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.text     "content"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
 
   create_table "favorite_questions", force: :cascade do |t|
     t.integer  "question_id"
@@ -44,7 +55,10 @@ ActiveRecord::Schema.define(version: 20170922111217) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "favorites_count", default: 0
+<<<<<<< HEAD
+=======
     t.integer  "user_id"
+>>>>>>> c633960f05a74b219b06a5a2a003291a7c35c60b
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,6 +82,8 @@ ActiveRecord::Schema.define(version: 20170922111217) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
   add_foreign_key "favorite_questions", "questions"
   add_foreign_key "favorite_questions", "users"
 end
