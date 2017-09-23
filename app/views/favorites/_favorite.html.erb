@@ -1,14 +1,12 @@
 <% if user_signed_in? %>
   <% unless favorite?(question) %>
-    <div>お気に入りに登録？？</div>
     <%= link_to question_favorites_path(question.id), class:"fa fa-star-o", method: :post, remote: true do %>
       <span>
         <%= question.favorites_count %>
       </span>
     <% end %>
   <% else %>
-    <div>お気に入り登録済</div>
-    <%= link_to question_favorite_path(question.id, question.favorite_by(current_user)), class:"fa fa-star-o", method: :delete,remote: true do %>
+    <%= link_to question_favorite_path(question.id, question.favorite_by(current_user)), class:"fa fa-star", method: :delete,remote: true do %>
       <span>
         <%= question.favorites_count %>
       </span>

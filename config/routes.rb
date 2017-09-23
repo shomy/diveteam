@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :favorites, only:[:create,:destroy]
   end
 
+  resources :favorites, only:[:index]
+
   devise_for :users
   root 'top#index'
 
