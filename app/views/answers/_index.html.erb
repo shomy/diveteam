@@ -1,0 +1,14 @@
+<p>
+    <strong>回答一覧</strong>
+    <ul>
+    <% answers.each do |answer| %>
+      <% unless answer.id.nil? %>
+        <li>
+          <p class="left"><%= answer.content %></p>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</p>
+
+<br><br>
