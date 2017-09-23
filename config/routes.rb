@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  resources :questions
+
+  resources :questions do
+    resources :favorites, only:[:create,:destroy]
+  end
+
+  resources :favorites, only:[:index]
+
   devise_for :users
   root 'top#index'
+
+  resources :users, only: [:index, :show]
 
   resources :favorite_questions, only: [:create,:destroy]
 

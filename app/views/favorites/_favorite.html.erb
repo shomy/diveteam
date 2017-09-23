@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+  <% unless favorite?(question) %>
+    <%= link_to question_favorites_path(question.id), class:"fa fa-star-o", method: :post, remote: true do %>
+      <span>
+        <%= question.favorites_count %>
+      </span>
+    <% end %>
+  <% else %>
+    <%= link_to question_favorite_path(question.id, question.favorite_by(current_user)), class:"fa fa-star", method: :delete,remote: true do %>
+      <span>
+        <%= question.favorites_count %>
+      </span>
+    <% end %>
+  <% end %>
+<% else %>
+ <%= link_to new_user_session_path ,class: "fa fa-star-o" %>
+<% end %>
