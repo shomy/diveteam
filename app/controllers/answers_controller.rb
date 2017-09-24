@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  before_action :set_answer, only: [:edit, :update, :destroy]
+
   def create
     @answer = current_user.answers.build(answer_params)
     @question = @answer.question
@@ -11,10 +13,26 @@ class AnswersController < ApplicationController
       end
     end
   end
+
+  def edit
+  end
+
+  def update
+    redirect_to question_path(@question), notice: '回答を編集しました。' if @answer.update(answer_params)
+  end
+
+  def destroy
+    redirect_to question_path(@question), notice: '回答を削除しました。' if @answer.destroy
+  end
   
   private
   # ストロングパラメーター
     def answer_params
       params.require(:answer).permit(:question_id, :content)
+    end
+
+    def set_answer
+      @answer = Answer.find(params[:id])
+      @question = @answer.question
     end
 end
