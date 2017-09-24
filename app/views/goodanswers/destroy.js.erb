@@ -1,0 +1,1 @@
+$("#goodanswer_form_"+"<%= @answer.id %>").html("<%= escape_javascript(render partial: 'goodanswers/touhyouform', locals:{ answer: @answer}) %>")

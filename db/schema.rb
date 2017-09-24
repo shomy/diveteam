@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170923051828) do
+ActiveRecord::Schema.define(version: 20170924110156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 20170923051828) do
   add_index "favorites", ["user_id", "question_id"], name: "index_favorites_on_user_id_and_question_id", unique: true, using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
+  create_table "goodanswers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "goodanswers", ["answer_id"], name: "index_goodanswers_on_answer_id", using: :btree
+  add_index "goodanswers", ["user_id", "answer_id"], name: "index_goodanswers_on_user_id_and_answer_id", unique: true, using: :btree
+  add_index "goodanswers", ["user_id"], name: "index_goodanswers_on_user_id", using: :btree
+
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
@@ -83,4 +94,6 @@ ActiveRecord::Schema.define(version: 20170923051828) do
   add_foreign_key "answers", "users"
   add_foreign_key "favorite_questions", "questions"
   add_foreign_key "favorite_questions", "users"
+  add_foreign_key "goodanswers", "answers"
+  add_foreign_key "goodanswers", "users"
 end

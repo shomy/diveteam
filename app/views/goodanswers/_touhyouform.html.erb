@@ -1,0 +1,21 @@
+<% if signed_in? %>
+  <div id="goodanswer_form_<%= answer.id %>">
+    <% unless Goodanswer.find_by(user_id: current_user.id, answer_id: answer.id).present? %>
+      <%= form_for(answer.goodanswers.build(user_id: current_user.id, answer_id: answer.id), url: goodanswers_path, remote: true) do |f|%>
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :answer_id %>
+        <%= f.submit "投票", class: "btn btn-success btn-sm" %>
+        【回答貢献度：<%= Goodanswer.where(answer_id:answer.id).count %> 】
+      <% end %>
+    <% else %>
+      <%= form_for(Goodanswer.find_by(user_id: current_user.id, answer_id: answer.id), url: goodanswer_path(Goodanswer.find_by(user_id: current_user.id, answer_id: answer.id)), method: :delete, remote: true) do |f|%>
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :answer_id %>
+        <%= f.submit "投票を取り消す", class: "btn btn-default btn-sm" %>
+        【回答貢献度：<%= Goodanswer.where(answer_id:answer.id).count %> 】
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <li><%= link_to '投票', new_user_session_path ,id: "wh",class: "btn btn-success btn-sm"%>【回答貢献度：<%= Goodanswer.where(answer_id:answer.id).count %> 】</li>
+<% end %>

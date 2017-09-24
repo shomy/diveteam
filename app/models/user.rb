@@ -12,4 +12,9 @@ class User < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   has_many :favorites
 
+  has_many :goodanswers, dependent: :destroy
+  has_many :ganswers, class_name: "Answer", foreign_key: "answer_id", through: :goodanswers
+
+
+
 end
