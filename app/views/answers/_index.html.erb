@@ -4,7 +4,15 @@
     <% answers.each do |answer| %>
       <% unless answer.id.nil? %>
         <li>
-          <p class="left"><%= answer.content %></p>
+          <p class="left"><%= answer.content %></p><p>(<%= link_to answer.user.name, user_path(answer.user.id) %>)</p>
+          <%= link_to "編集", 
+            edit_question_answer_path(answer.question, answer), 
+            class: 'btn btn-default btn-sm btn-success' %>
+          <%= link_to "削除", 
+            question_answer_path(answer.question, answer), 
+            method: :delete, data: { confirm: '本当に削除していいですか？'}, 
+            class: 'btn btn-default btn-sm btn btn-danger' %>
+            <br><br>
         </li>
       <% end %>
     <% end %>
