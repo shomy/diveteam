@@ -14,6 +14,7 @@
                 method: :delete, data: { confirm: '本当に削除していいですか？'}, 
                 class: 'btn btn-default btn-sm btn btn-danger' %>
             <% end %>
+            <%= render partial: 'goodanswers/touhyouform',locals: { answer: answer} %>
             <br><br>
         </li>
       <% end %>
