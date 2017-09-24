@@ -34,5 +34,6 @@ class AnswersController < ApplicationController
     def set_answer
       @answer = Answer.find(params[:id])
       @question = @answer.question
+      redirect_to root_path unless view_context.login_user?(@answer.user)
     end
 end
