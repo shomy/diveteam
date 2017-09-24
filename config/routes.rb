@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
 
   resources :favorite_questions, only: [:create,:destroy]
+  resources :goodanswers,only: [:create, :destroy]
 
   resources :questions do
     resources :answers
