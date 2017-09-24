@@ -1,28 +1,26 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Questions</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
 
 <table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
   <tbody>
     <% @questions.each do |question| %>
       <tr>
-        <td><%= question.title %></td>
-        <td><%= question.content %></td>
-        <td><%=  %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= render partial: 'favorite_question/follow_form', locals: { question: question }  %></td>
+        <td><%= link_to question_path(question) do %>
+          <div class="btn btn-block "><h4><strong><%= question.title %></strong></h4></div>
+        <% end %></td>
+      </tr>
+      <tr>
+      <td><%= render partial: 'favorite_question/follow_form', locals: { question: question }  %></td>
+        <td><div class="btn btn-default btn-sm">質問貢献度:<%= FavoriteQuestion.where(question_id:question).count %></div></td>
+        <% if current_user.id == question.user_id%>
+        <td><%= link_to '編集', edit_question_path(question),class: "btn btn-sm btn-default" %></td>
+        <td><%= link_to '削除', question, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-sm btn-default" %></td>
+        <%end%>
 
-        <td>good:<%= FavoriteQuestion.where(question_id:question).count %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +28,9 @@
 
 <br>
 
-<%= link_to 'New Question', new_question_path %>
+<%= link_to '質問をする', new_question_path %>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
+
