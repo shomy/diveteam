@@ -55,10 +55,7 @@ ActiveRecord::Schema.define(version: 20170923051828) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "favorites_count", default: 0
-<<<<<<< HEAD
-=======
     t.integer  "user_id"
->>>>>>> c633960f05a74b219b06a5a2a003291a7c35c60b
   end
 
   create_table "users", force: :cascade do |t|
