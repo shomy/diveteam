@@ -1,13 +1,15 @@
-      <% unless FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id).present? %>
-        <%= form_for(question.favorite_questions.build(user_id: current_user.id, question_id: question.id), url: favorite_questions_path) do |f| %>
-          <%= f.hidden_field :user_id %>
-          <%= f.hidden_field :question_id %>
-          <%= f.submit "投票", class: "btn btn-sm btn-success" %>
-        <% end %>
-      <% else %>
-        <%= form_for(FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id), url: favorite_question_path(FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id)),method: :delete) do |f| %>
-          <%= f.hidden_field :user_id %>
-          <%= f.hidden_field :question_id %>
-          <%= f.submit "投票を取り消す", class: "btn btn-sm btn-default"%>
-        <% end %>
-      <% end %>
+<% if user_signed_in? %>
+  <% unless FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id).present? %>
+    <%= form_for(question.favorite_questions.build(user_id: current_user.id, question_id: question.id), url: favorite_questions_path) do |f| %>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :question_id %>
+      <%= f.submit "投票", class: "btn btn-sm btn-success" %>
+    <% end %>
+  <% else %>
+    <%= form_for(FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id), url: favorite_question_path(FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id)),method: :delete) do |f| %>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :question_id %>
+      <%= f.submit "投票を取り消す", class: "btn btn-sm btn-default"%>
+    <% end %>
+  <% end %>
+<% end %>
