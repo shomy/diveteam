@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Title:</strong>
   <%= @question.title %>
@@ -12,8 +10,9 @@
 
 <%= render partial: 'answers/index', locals: { answers: @answers, question: @question } %>
 <%= render partial: 'answers/form', locals: { answer: @answer, question: @question } %>
+
 <div id="favorites-button">
-<%= render partial: 'favorites/favorite', locals: { question: @question} %>
+  <%= render partial: 'favorites/favorite', locals: { question: @question} %>
 </div>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |
