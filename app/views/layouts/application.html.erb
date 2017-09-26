@@ -5,22 +5,99 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= favicon_link_tag("so-favicon.png") %>
 </head>
 <body>
 
   <header>
-    <% if user_signed_in? %>
-      <li><%= link_to '質問', questions_path %></li>
-      <li><%= link_to 'プロフィール編集',edit_user_registration_path %></li>
-      <li><%= link_to "お気に入り一覧" , favorites_path %></li>
-      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-    <% else %>
-      <li><%= link_to 'ログイン', new_user_session_path %></li>
-      <li><%= link_to 'サインアップ', new_user_registration_path %></li>
-    <% end %>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+    	<div class="container-fluid">
+    		<div class="navbar-header">
+
+    			<button type="button" class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbarEexample8">
+    				<span class="sr-only">Toggle navigation</span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    			</button>
+
+    			<a class="navbar-brand" href="/" >
+            <img src="<%= asset_path "so-logo.png" %>" style="height: 32px;">
+    			</a>
+
+    			<ul class="nav navbar-nav">
+            <li><%= link_to '質問', questions_path %></li>
+            <li><a href="/">ランキング</a></li>
+            <li><%= link_to "お気に入り一覧" , favorites_path %></li>
+    				<li><a href="/">タグ</a></li>
+            <li><%= link_to 'ユーザー', users_path %></li>
+            <li><a class="navbar-brand" style="width: 240px; padding-top: 8px; padding-bottom: 8px;">
+              <form action="" accept-charset="UTF-8" method="get" class="input-group navbar-left" role="search">
+                <input type="text" class="form-control" placeholder="Search.." name="search" id="search" value>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit" value="Search">
+                    <i class='fa fa-search'></i>
+                  </button>
+                </span>
+              </form>
+            </a></li>
+
+          <% if user_signed_in? %>
+
+            <li>
+              <%= profile_img(current_user) if profile_img(current_user) %>
+            </li>
+            <li>
+              <%= link_to 'マイページ', user_path(current_user) %>
+            </li>
+            <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+            <li>
+              <ul class="nav">
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" style="color: #29487d; padding-top: 15px; padding-bottom: 15px;">
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu left">
+                    <li><a href="#">現在のコミュニティ</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">あなたのコミュニティ</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">コミュニティをさらに表示</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+          <% else %>
+
+            <li><%= link_to 'ログイン', new_user_session_path %></li>
+            <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+
+          <% end %>
+
+          </ul>
+        </div>
+    	</div>
+    </nav>
   </header>
 
-<%= yield %>
+  <div class="container">
+    <p id="notice"><%= notice %><%= alert %></p>
+    <%= yield %>
+  </div>
+
+  <footer>
+    <ul>
+      <li><a>diveteam</a></li>
+      <li><a>利用規約</a></li>
+      <li><a>プライバシーポリシー</a></li>
+      <li><a>運営会社</a></li>
+      <li><a>@ 2017 dive into code</a></li>
+    </ul>
+  </footer>
+
 
 </body>
 </html>

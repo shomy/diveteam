@@ -1,3 +1,31 @@
-// Place all the styles related to the top controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-top: 70px;
+  margin-bottom: 140px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #242729;
+}
+
+footer ul {
+  margin: 0 auto;
+  list-style: none;
+}
+
+footer ul a {
+  font-size: 11px;
+  color: #848d95;
+  text-decoration: none;
+}
+
+.btn-primary{
+  color:white;
+}

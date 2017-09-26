@@ -7,9 +7,16 @@ Rails.application.routes.draw do
   resources :favorites, only:[:index]
 
   devise_for :users
-  root 'top#index'
+  root 'questions#index'
+
+  resources :users, only: [:index, :show]
 
   resources :favorite_questions, only: [:create,:destroy]
+  resources :goodanswers,only: [:create, :destroy]
+
+  resources :questions do
+    resources :answers
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

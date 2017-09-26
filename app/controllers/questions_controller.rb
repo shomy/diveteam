@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   # GET /questions
@@ -10,6 +11,8 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @answer = @question.answers.build
+    @answers = @question.answers
   end
 
   # GET /questions/new
@@ -24,7 +27,7 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.build(question_params)
 
     respond_to do |format|
       if @question.save

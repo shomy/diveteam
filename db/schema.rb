@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922110034) do
+ActiveRecord::Schema.define(version: 20170924110156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.text     "content"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
 
   create_table "favorite_questions", force: :cascade do |t|
     t.integer  "question_id"
@@ -38,6 +49,17 @@ ActiveRecord::Schema.define(version: 20170922110034) do
   add_index "favorites", ["user_id", "question_id"], name: "index_favorites_on_user_id_and_question_id", unique: true, using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
+  create_table "goodanswers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "goodanswers", ["answer_id"], name: "index_goodanswers_on_answer_id", using: :btree
+  add_index "goodanswers", ["user_id", "answer_id"], name: "index_goodanswers_on_user_id_and_answer_id", unique: true, using: :btree
+  add_index "goodanswers", ["user_id"], name: "index_goodanswers_on_user_id", using: :btree
+
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
@@ -45,7 +67,6 @@ ActiveRecord::Schema.define(version: 20170922110034) do
     t.datetime "updated_at",                  null: false
     t.integer  "favorites_count", default: 0
     t.integer  "user_id"
-    t.string   "user_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -61,12 +82,18 @@ ActiveRecord::Schema.define(version: 20170922110034) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "avatar"
     t.string   "name"
+    t.text     "profile"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
   add_foreign_key "favorite_questions", "questions"
   add_foreign_key "favorite_questions", "users"
+  add_foreign_key "goodanswers", "answers"
+  add_foreign_key "goodanswers", "users"
 end
