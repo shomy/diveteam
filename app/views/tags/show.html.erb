@@ -1,5 +1,5 @@
 <h1>タグ付けされた質問</h1>
-<div id="tag_space">
+<div>
   <span class="tag" ><%= @tag.name %></span>
 </div>
 
@@ -16,6 +16,9 @@
         <li class="pull-left">
           <%= render partial: "tags/tag_list", locals: {tags: tag.tags} %>
         </li>
+        <span class="time">
+          生成日時:<%= tag.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %>
+        </span>
         <li class="pull-right">
           <%= link_to user_path(tag.user) do %><%= tag.user.name %><% end %>
         </li>

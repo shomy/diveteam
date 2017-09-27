@@ -21,7 +21,7 @@
   </div>
   <div>
     <%= f.label :tags %>
-    <%= f.text_field :tags, 'data-role'=>'tagsinput', value: comma_join(@question.tags), placeholder: "質問に関連するタグをつけることができます" %>
+    <%= f.text_field :tags, value: comma_join(@question.tags), placeholder: "質問に関連するタグを入力" %>
   </div>
   <div class="actions">
     <%= f.submit %>

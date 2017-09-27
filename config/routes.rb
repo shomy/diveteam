@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'tags/index'
-
-  get 'tags/show'
-
   resources :questions do
     resources :favorites, only:[:create,:destroy]
   end
