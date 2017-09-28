@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :favorites, only:[:index]
 
   devise_for :users
-  root 'questions#index'
+  root 'top#index'
 
   resources :users, only: [:index, :show]
 

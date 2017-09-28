@@ -54,3 +54,5 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'bootstrap-tagsinput-rails'
+
+gem 'ransack'

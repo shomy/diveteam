@@ -19,5 +19,5 @@
   <%= render partial: 'favorites/favorite', locals: { question: @question} %>
 </div>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
+<span data-turbolinks="false"><%= link_to 'Edit', edit_question_path(@question) %></span> |
 <%= link_to 'Back', questions_path %>
