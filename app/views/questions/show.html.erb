@@ -8,6 +8,10 @@
   <%= @question.content %>
 </p>
 
+<p>
+<%= render partial: "tags/tag_list", locals: {tags: @question.tags} %>
+</p>
+
 <%= render partial: 'answers/index', locals: { answers: @answers, question: @question } %>
 <%= render partial: 'answers/form', locals: { answer: @answer, question: @question } %>
 
