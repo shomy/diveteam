@@ -55,3 +55,5 @@ end
 
 gem 'carrierwave'
 gem 'mini_magick'
+
+gem 'bootstrap-tagsinput-rails'

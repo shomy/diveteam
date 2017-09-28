@@ -1,0 +1,9 @@
+<ul class="list-inline text-center">
+  <% if question.answers.count > 0 %>
+    <% classname = "answers-existence" %>
+  <% else %>
+    <% classname = "answers-absence" %>
+  <% end %>
+  <li class="<%= classname %>"><%= question.answers.count %><br>回答</li>
+
+</ul>

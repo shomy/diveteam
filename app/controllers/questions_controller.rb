@@ -29,6 +29,10 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = current_user.questions.build(question_params)
+    input_tags_names.each do |name|
+      tag = Tag.register!(name)
+      @question.taggings.build(tag_id: tag.id)
+    end
 
     respond_to do |format|
       if @question.save
@@ -44,6 +48,11 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    @question.tags.destroy_all
+    input_tags_names.each do |name|
+      tag = Tag.register!(name)
+      @question.taggings.build(tag_id: tag.id)
+    end
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
@@ -74,5 +83,8 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:title, :content)
+    end
+    def input_tags_names
+      params.require(:question).permit(:tags)['tags'].split(",")
     end
 end
