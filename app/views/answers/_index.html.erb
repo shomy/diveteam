@@ -1,25 +1,45 @@
-<p>
-    <strong>回答一覧</strong>
-    <ul>
-    <% answers.each do |answer| %>
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="answers-head">
+      <strong>回答一覧</strong>
+      <h4><%= answers.count %> 件の回答</p></h4>
+      <% if true_or_false?(answer_order) %>
+        <p><%= link_to "新しい順", controller: "questions", action: "show", answer_order: false %></p>
+      <% else %>
+        <p><%= link_to "古い順", controller: "questions", action: "show", answer_order: true %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <% answer_list(answers, answer_order).each do |answer| %>
       <% unless answer.id.nil? %>
-        <li>
-          <p class="left"><%= answer.content %></p><p>(<%= link_to answer.user.name, user_path(answer.user.id) %>)</p>
+        <div class="answers-list">
+          <p><%= simple_format(answer.content) %></p>
+          <%= render partial: 'goodanswers/touhyouform',locals: {answer: answer} %>
+          <div class="clear-element"></div>
+          <div align="right">回答日時：<%= answer.created_at.strftime("%y/%m/%d %p %l:%M") %>
+          </div>
+          <div class="answers-userdata">
+            <%= link_to profile_img(answer.user), user_path(answer.user.id) %>
+            <%= link_to answer.user.name, user_path(answer.user.id) %>
+          </div>
+          <div class="clear-element"></div>
+          <div class="answers-edit">
             <% if login_user?(answer.user) %>
               <%= link_to "編集", 
-                edit_question_answer_path(answer.question, answer), 
-                class: 'btn btn-default btn-sm btn-success' %>
+                edit_question_answer_path(answer.question, answer)%>
               <%= link_to "削除", 
                 question_answer_path(answer.question, answer), 
-                method: :delete, data: { confirm: '本当に削除していいですか？'}, 
-                class: 'btn btn-default btn-sm btn btn-danger' %>
+                method: :delete, data: { confirm: '本当に削除していいですか？'}%>
             <% end %>
-            <%= render partial: 'goodanswers/touhyouform',locals: { answer: answer} %>
-            <br><br>
-        </li>
+          </div>
+        </div>
       <% end %>
     <% end %>
-  </ul>
-</p>
+  </div>
+</div>
 
 <br><br>
