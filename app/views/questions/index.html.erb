@@ -11,6 +11,7 @@
         <td><%= link_to question_path(question) do %>
           <div class="btn btn-block "><h4><strong><%= question.title %></strong></h4></div>
         <% end %></td>
+        <td><%= render partial: "tags/tag_list", locals: {tags: question.tags} %></td>
       </tr>
       <tr>
       <td><%= render partial: 'favorite_question/follow_form', locals: { question: question }  %></td>
@@ -27,9 +28,10 @@
 
 <br>
 
+<div data-turbolinks="false">
 <%= link_to '質問をする', new_question_path %>
+</div>
     </div>
     <div class="col-md-3"></div>
   </div>
 </div>
-
