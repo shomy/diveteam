@@ -47,6 +47,11 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    @question.tags.destroy_all
+    input_tags_names.each do |name|
+      tag = Tag.register!(name)
+      @question.taggings.build(tag_id: tag.id)
+    end
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }

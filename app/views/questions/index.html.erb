@@ -17,7 +17,7 @@
       <td><%= render partial: 'favorite_question/follow_form', locals: { question: question }  %></td>
         <td><div class="btn btn-default btn-sm">質問貢献度:<%= FavoriteQuestion.where(question_id:question).count %></div></td>
         <% if login_user?(question.user) %>
-          <td><%= link_to '編集', edit_question_path(question),class: "btn btn-sm btn-default" %></td>
+          <td><div data-turbolinks="false"><%= link_to '編集', edit_question_path(question),class: "btn btn-sm btn-default" %></div></td>
           <td><%= link_to '削除', question, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-default" %></td>
         <% end %>
 
