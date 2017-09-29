@@ -28,7 +28,7 @@ gem 'jquery-turbolinks'
 
 gem 'simple_form'
 gem 'therubyracer'
-gem 'less-rails'
+gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 gem 'twitter-bootstrap-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -57,3 +57,5 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'bootstrap-tagsinput-rails'
+
+gem 'ransack'

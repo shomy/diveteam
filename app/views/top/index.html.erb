@@ -1,36 +1,38 @@
-# <p id="notice"><%= notice %></p>
-# <div class="container-fluid">
-#   <div class="row">
-#     <div class="col-md-1"></div>
-#     <div class="col-md-8">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
 
-# <table>
+      <div data-turbolinks="false">
+      <%= link_to '質問をする', new_question_path %>
+      </div>
 
-#   <tbody>
-#     <% @questions.each do |question| %>
-#       <tr>
-#         <td><%= link_to question_path(question) do %>
-#           <div class="btn btn-block "><h4><strong><%= question.title %></strong></h4></div>
-#         <% end %></td>
-#       </tr>
-#       <tr>
-#       <td><%= render partial: 'favorite_question/follow_form', locals: { question: question }  %></td>
-#         <td><div class="btn btn-default btn-sm">質問貢献度:<%= FavoriteQuestion.where(question_id:question).count %></div></td>
-#         <% if login_user?(question.user)%>
-#           <td><%= link_to '編集', edit_question_path(question),class: "btn btn-sm btn-default" %></td>
-#           <td><%= link_to '削除', question, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-sm btn-default"%></td>
-#         <%end%>
+<table>
 
-#       </tr>
-#     <% end %>
-#   </tbody>
-# </table>
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= link_to question_path(question) do %>
+          <div class="btn btn-block "><h4><strong><%= question.title %></strong></h4></div>
+        <% end %></td>
+        <td><%= render partial: "tags/tag_list", locals: {tags: question.tags} %></td>
+      </tr>
+      <tr>
+      <td><%= render partial: 'favorite_question/follow_form', locals: { question: question }  %></td>
+        <td><div class="btn btn-default btn-sm">質問貢献度:<%= FavoriteQuestion.where(question_id:question).count %></div></td>
+        <% if login_user?(question.user) %>
+          <td><div data-turbolinks="false"><%= link_to '編集', edit_question_path(question),class: "btn btn-sm btn-default" %></div></td>
+          <td><%= link_to '削除', question, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-default" %></td>
+        <% end %>
 
-# <br>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
+<br>
 
-#     </div>
-#     <div class="col-md-3"><%= link_to '質問をする', new_question_path,class: "btn btn-sm btn-primary" %></div>
-#   </div>
-# </div>
-
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 class TopController < ApplicationController
   def index
-    @questions = Question.all
+    @q = Question.order("created_at DESC").ransack(params[:q])
+    @questions = @q.result
   end
 end
