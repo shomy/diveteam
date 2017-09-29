@@ -1,0 +1,17 @@
+<h4>〜<%= current_user.name %>のお気に入り登録一覧〜</h4>
+<p><%= favorite.count %>件のお気に入り登録</p>
+
+<% favorite.each do |favorite| %>
+
+  <div class=child>
+    <span id="favorites-button">
+      <%= render partial: 'favorites/favorite', locals: { question: favorite.question} %>
+    </span>
+    <span class="title">
+      <%= link_to favorite.question.title, question_path(favorite.question) %>
+    </span>
+    <span class="time">
+      更新日時:<%= favorite.question.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>
+    </span>
+  </div>
+<% end %>

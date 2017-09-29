@@ -9,6 +9,11 @@
 </p>
 
 <p>
+  <strong>author:</strong>
+  <%= @question.user.name %>
+</p>
+
+<p>
 <%= render partial: "tags/tag_list", locals: {tags: @question.tags} %>
 </p>
 

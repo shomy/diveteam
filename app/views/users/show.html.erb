@@ -4,7 +4,7 @@
   <h1>ユーザー詳細</h1>
 <% end %>
 
-
+<p><%= profile_img(@user) %></p>
 <p><%= @user.name %></p>
 <p>
   プロフィール：
@@ -16,8 +16,51 @@
 </p>
 <p>e-mail：<%= @user.email %></p>
 <p>質問数：<%= @user.questions.count %>回</p>
+<p>回答数：<%= @user.answers.count %>回</p>
 
 
 <% if user_signed_in? && current_user.id === @user.id %>
-    <%= link_to '編集', edit_user_registration_path(current_user) %>
+  <%= link_to '編集', edit_user_registration_path(current_user), class:'btn btn-info' %>
+<% end %>
+
+<br>
+<br>
+
+<div class="panel panel-primary panel-scroll-original">
+  <div class="panel-heading">
+      <h2 class="panel-title">投稿した質問 <%= @user.questions.count %>回</h2>
+  </div>
+  <div class="panel-body">
+    <% if @user.questions.empty? %>
+      <%= "#{@user.name}さんの質問はありません。" %>
+    <% else %>
+      <% @user.questions.each do |question| %>
+        <%= link_to question.title, question_path(question.id) %>
+        <%= question.content.truncate(24) %><br>
+        <%= question.created_at %><hr>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel panel-primary panel-scroll-original">
+  <div class="panel-heading">
+      <h2 class="panel-title">投稿した回答 <%= @user.answers.count %>回</h2>
+  </div>
+  <div class="panel-body">
+    <% if @user.answers.empty? %>
+      <%= "#{@user.name}さんの回答はありません。" %>
+    <% else %>
+      <% @user.answers.each do |answer| %>
+        <%= link_to answer.question.title, question_path(answer.question.id) %>
+        <%= answer.content.truncate(24) %><br>
+        <%= answer.created_at %><hr>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+<% if user_signed_in? && current_user.id === @user.id %>
+  <%= render partial: "favorites/index", locals: {favorite: current_user.favorites.joins(:question)} %>
 <% end %>
