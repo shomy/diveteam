@@ -1,9 +1,8 @@
 GIT
-  remote: git@github.com:metaskills/less-rails.git
-  revision: ce747da73544dc249a266d1eacd0ca7f69299937
-  branch: rails5
+  remote: https://github.com/MustafaZain/less-rails
+  revision: 946213803a5b274260dad17526eb201230e4a761
   specs:
-    less-rails (2.8.0)
+    less-rails (2.8.1)
       actionpack (>= 4.0)
       less (~> 2.6.0)
       sprockets (> 2, < 4)
