@@ -18,6 +18,20 @@
 <p>質問数：<%= @user.questions.count %>回</p>
 <p>回答数：<%= @user.answers.count %>回</p>
 
+<% qpoint = [] %>
+<% @user.questions.each do |question| %>
+<% qpoint = question.favo_users.count %>
+<% end %>
+<% qpoint = 0 if qpoint == [] %>
+<p>質問貢献度：<%= qpoint %>点</p>
+
+<% apoint = [] %>
+<% @user.answers.each do |answer| %>
+<% apoint = answer.goodanswers.count %>
+<% end %>
+<% apoint = 0 if apoint == [] %>
+<p>回答貢献度：<%= apoint %>点</p>
+
 
 <% if user_signed_in? && current_user.id === @user.id %>
   <%= link_to '編集', edit_user_registration_path(current_user), class:'btn btn-info' %>
