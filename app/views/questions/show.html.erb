@@ -12,7 +12,7 @@
 <%= render partial: "tags/tag_list", locals: {tags: @question.tags} %>
 </p>
 
-<%= render partial: 'answers/index', locals: { answers: @answers, question: @question } %>
+<%= render partial: 'answers/index', locals: { answers: @answers, question: @question, answer_order: @answer_order } %>
 <%= render partial: 'answers/form', locals: { answer: @answer, question: @question } %>
 
 <div id="favorites-button">
