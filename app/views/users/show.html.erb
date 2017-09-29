@@ -36,7 +36,7 @@
     <% else %>
       <% @user.questions.each do |question| %>
         <%= link_to question.title, question_path(question.id) %>
-        <%= question.content.truncate(24) %><br>
+        <%= question.content.truncate(40) %><br>
         <%= question.created_at %><hr>
       <% end %>
     <% end %>
@@ -53,7 +53,7 @@
     <% else %>
       <% @user.answers.each do |answer| %>
         <%= link_to answer.question.title, question_path(answer.question.id) %>
-        <%= answer.content.truncate(24) %><br>
+        <%= answer.content.truncate(40) %><br>
         <%= answer.created_at %><hr>
       <% end %>
     <% end %>
