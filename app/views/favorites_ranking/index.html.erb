@@ -1,0 +1,16 @@
+<h1>ランキング</h1>
+
+<% @questions.each_with_index do |question, i| %>
+    <div class=child>
+      <span>順位：<%= i + 1 %>位</span>
+      <p>お気に入り数：<%= question.favorites_count %>
+        <span class="space">
+        <%= link_to question_path(question) do %><%= question.title %><% end %>
+        </span>
+        <span class="pull-right">
+          更新日時 :<%= question.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>
+        </span>
+      </p>
+    </div>
+
+<% end %>

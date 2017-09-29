@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
   def show
     @answer = @question.answers.build
     @answers = @question.answers
+    @answer_order = params[:answer_order]
   end
 
   # GET /questions/new

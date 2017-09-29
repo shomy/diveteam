@@ -13,4 +13,5 @@ class Question < ActiveRecord::Base
   def favorite_by(user)
     favorites.find_by(user_id: user.id)
   end
+
 end

@@ -1,11 +1,8 @@
 <% if user_signed_in? %>
-  <%= form_for([question,answer]) do |f| %>
+  <%= simple_form_for([question,answer]) do |f| %>
     <%= f.hidden_field :question_id %>
-    <div class="field">
-      <%= f.text_field :content, placeholder: "回答", class: "form-control"  %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+    <%= f.input :content, input_html: { preview: true, rows: 8},label: "回答を入力", error: 'エラーを表示する'  %>
+    <%= f.button :submit, "回答する", class: "btn btn-info" %>
   <% end %>
+  <br>
 <% end %>

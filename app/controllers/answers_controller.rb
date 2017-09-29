@@ -2,17 +2,19 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_answer, only: [:edit, :update, :destroy]
 
+  def index
+  end
+
   def create
     @answer = current_user.answers.build(answer_params)
     @question = @answer.question
-    respond_to do |format|
+    # respond_to do |format|
       if @answer.save
-        format.html { redirect_to question_path(@question), notice: '回答を投稿しました。' }
-        format.js { render :index }
+        redirect_to question_path(@question), notice: '回答を投稿しました。'
       else
-        format.html { render :new }
+        redirect_to question_path(@question), alert: '回答が未入力です。'
       end
-    end
+    # end
   end
 
   def edit
