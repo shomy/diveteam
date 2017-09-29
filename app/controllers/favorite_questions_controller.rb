@@ -6,14 +6,14 @@ class FavoriteQuestionsController < ApplicationController
     @favorite_question = FavoriteQuestion.new(favoritequestion_params)
 
       if @favorite_question.save
-        redirect_to questions_path
+        return_back and return
       end
   end
 
   def destroy
     @favorite_question = FavoriteQuestion.find(params[:id])
     if @favorite_question.destroy
-      redirect_to questions_path
+      return_back and return
     end
   end
 

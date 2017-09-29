@@ -1,3 +1,14 @@
+GIT
+  remote: git@github.com:metaskills/less-rails.git
+  revision: ce747da73544dc249a266d1eacd0ca7f69299937
+  branch: rails5
+  specs:
+    less-rails (2.8.0)
+      actionpack (>= 4.0)
+      less (~> 2.6.0)
+      sprockets (> 2, < 4)
+      tilt
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -90,11 +101,6 @@ GEM
     json (1.8.6)
     less (2.6.0)
       commonjs (~> 0.2.7)
-    less-rails (2.8.0)
-      actionpack (>= 4.0)
-      less (~> 2.6.0)
-      sprockets (> 2, < 4)
-      tilt
     libv8 (3.16.14.19)
     loofah (2.1.1)
       crass (~> 1.0.2)
@@ -234,7 +240,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
-  less-rails
+  less-rails!
   mini_magick
   pg
   pry-byebug
