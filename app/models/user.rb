@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   has_many :goodanswers, dependent: :destroy
   has_many :ganswers, class_name: "Answer", foreign_key: "answer_id", through: :goodanswers
 
+  def question_contributed_count
+    questions.map{|question| question.favo_users.count}.inject(:+)
+  end
 
 
 end
