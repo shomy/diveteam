@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
 
   def answer_contributed_count
-    answers.map{|answer| answer.ganswers.count}.inject(0, :+)
+    answers.map{|answer| answer.goodanswers.count}.inject(0, :+)
   end
 
 end
