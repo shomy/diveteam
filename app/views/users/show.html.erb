@@ -18,13 +18,7 @@
 <p>質問数：<%= @user.questions.count %>回</p>
 <p>回答数：<%= @user.answers.count %>回</p>
 <p>質問貢献度：<%= @user.question_contributed_count %>点</p>
-
-<% apoint = 0 %>
-<% @user.answers.each do |answer| %>
-<% apoint += answer.goodanswers.count %>
-<% end %>
-<p>回答貢献度：<%= apoint %>点</p>
-
+<p>回答貢献度：<%= @user.answer_contributed_count %>点</p>
 
 <% if user_signed_in? && current_user.id === @user.id %>
   <%= link_to '編集', edit_user_registration_path(current_user), class:'btn btn-info' %>

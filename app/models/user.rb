@@ -16,8 +16,11 @@ class User < ActiveRecord::Base
   has_many :ganswers, class_name: "Answer", foreign_key: "answer_id", through: :goodanswers
 
   def question_contributed_count
-    questions.map{|question| question.favo_users.count}.inject(:+)
+    questions.map{|question| question.favo_users.count}.inject(0, :+)
   end
 
+  def answer_contributed_count
+    answers.map{|answer| answer.ganswers.count}.inject(0, :+)
+  end
 
 end
